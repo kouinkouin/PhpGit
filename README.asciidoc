@@ -1,0 +1,12 @@
+= PhpGit
+
+== Description
+
+PhpGit is a PHP library to control a git repository.
+
+If you actualize code (do it !), don't forget unit tests.
+
+== Requirements
+
+* Linux system
+* A system with [git](http://git-scm.com/) installed
