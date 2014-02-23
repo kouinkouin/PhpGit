@@ -15,12 +15,12 @@ class ExecutionResponse {
 
 	/**
 	 * @param int $returnCode
-	 * @param string $output
+	 * @param array $output
 	 * @param float $executionTime
 	 */
-	public function __construct($returnCode, $output, $executionTime) {
+	public function __construct($returnCode, array $output, $executionTime) {
 		$this->returnCode = (int) $returnCode;
-		$this->setOutput($output);
+		$this->output = $output;
 		$this->executionTime = (float) $executionTime;
 	}
 
@@ -39,17 +39,6 @@ class ExecutionResponse {
 	 */
 	public function getOutput() {
 		return $this->output;
-	}
-
-	/**
-	 * Translates and sets the output from string to array
-	 * @param string $output
-	 */
-	private function setOutput($output) {
-		$this->output = explode(PHP_EOL, $output);
-		if(strlen(end($this->output))===0) {
-			array_pop($this->output);
-		}
 	}
 
 	/**
