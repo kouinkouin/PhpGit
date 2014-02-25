@@ -8,7 +8,7 @@ require_once __DIR__.'/../../PhpGit/ShellCommand/Executor.php';
 
 /**
  * _
- * @author  Raphaël Pommier (raphael@pommier.me)
+ * @author  RaphaÃ«l Pommier (raphael@pommier.me)
  * @since   2014-02-23
  */
 class GitManagerTest extends \PHPUnit_Framework_TestCase {

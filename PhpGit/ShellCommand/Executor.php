@@ -4,7 +4,7 @@ namespace PhpGit\ShellCommand;
 
 /**
  * _
- * @author  Raphaël Pommier (raphael@pommier.me)
+ * @author  RaphaÃ«l Pommier (raphael@pommier.me)
  * @since   2014-02-23
  */
 class Executor {

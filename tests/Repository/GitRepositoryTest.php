@@ -8,7 +8,7 @@ require_once __DIR__.'/../../PhpGit/Repository/GitRepository.php';
 
 /**
  * Class GitRepositoryTest
- * @author  Raphaël Pommier (raphael@pommier.me)
+ * @author  RaphaÃ«l Pommier (raphael@pommier.me)
  * @since   2014-02-22
  */
 class GitRepositoryTest extends \PHPUnit_Framework_TestCase {

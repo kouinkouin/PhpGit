@@ -8,7 +8,7 @@ use PhpGit\Exception\GitException;
 
 /**
  * _
- * @author  Raphaël Pommier (raphael@pommier.me)
+ * @author  RaphaÃ«l Pommier (raphael@pommier.me)
  * @since   2014-02-23
  */
 class GitExceptionTest extends \PHPUnit_Framework_TestCase {
