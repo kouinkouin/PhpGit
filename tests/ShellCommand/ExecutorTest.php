@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpGitTests\Manager;
+namespace PhpGitTests\ShellCommand;
 
-require_once __DIR__.'/../../PhpGit/Manager/ShellManager.php';
+use PhpGit\ShellCommand\Executor;
 
-use PhpGit\Manager\ShellManager;
+require_once __DIR__.'/../../PhpGit/ShellCommand/Executor.php';
 
 /**
  * _
@@ -14,9 +14,9 @@ use PhpGit\Manager\ShellManager;
 class GitManagerTest extends \PHPUnit_Framework_TestCase {
 
 	public function testExecute() {
-		$gitManager = new ShellManager();
+		$gitManager = new Executor();
 		$response = $gitManager->execute('echo 42');
-		$this->assertInstanceOf('PhpGit\Entity\ExecutionResponse', $response);
+		$this->assertInstanceOf('PhpGit\ShellCommand\Response', $response);
 		$this->assertSame(0, $response->getReturnCode());
 		$this->assertSame(array('42'), $response->getOutput());
 	}

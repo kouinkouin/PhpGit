@@ -1,13 +1,13 @@
 <?php
 
-namespace PhpGit\Entity;
+namespace PhpGit\ShellCommand;
 
 /**
  * _
  * @author  Raphaël Pommier (raphael@pommier.me)
  * @since   2014-02-23
  */
-class ExecutionResponse {
+class Response {
 
 	private $returnCode;
 	private $output;

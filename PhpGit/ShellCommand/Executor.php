@@ -1,14 +1,13 @@
 <?php
 
-namespace PhpGit\Manager;
-use PhpGit\Entity\ExecutionResponse;
+namespace PhpGit\ShellCommand;
 
 /**
  * _
  * @author  Raphaël Pommier (raphael@pommier.me)
  * @since   2014-02-23
  */
-class ShellManager {
+class Executor {
 
 	public function __construct() {
 	}
@@ -16,6 +15,6 @@ class ShellManager {
 	public function execute($command) {
 		$microtime = microtime(true);
 		exec($command, $output, $returnCode);
-		return new ExecutionResponse($returnCode, $output, microtime(true) - $microtime);
+		return new Response($returnCode, $output, microtime(true) - $microtime);
 	}
 }
