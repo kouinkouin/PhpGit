@@ -79,38 +79,50 @@ class GitRepositoryTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame($assertCommand, $gitRepository->getCheckout('mybranch', true));
 	}
 
+	public function testGetMerge() {
+		$gitRepository = new GitRepository();
+		$assertCommand = "git merge --no-ff mybranch";
+		$this->assertSame($assertCommand, $gitRepository->getMerge('mybranch'));
+	}
+
+	public function testGetMergeWithMessage() {
+		$gitRepository = new GitRepository();
+		$assertCommand = "git merge --no-ff mybranch -m \"Merge happy branch into master\"";
+		$this->assertSame($assertCommand, $gitRepository->getMerge('mybranch', 'Merge happy branch into master'));
+	}
+
+	public function testGetRebase() {
+		$gitRepository = new GitRepository();
+		$assertCommand = "git rebase master";
+		$this->assertSame($assertCommand, $gitRepository->getRebase('master'));
+	}
+
+	public function testGetRebaseOnto() {
+		$gitRepository = new GitRepository();
+		$assertCommand = "git rebase --onto master oldmaster";
+		$this->assertSame($assertCommand, $gitRepository->getRebase('master', 'oldmaster'));
+	}
+
+	public function testGetRebasePreserveMerges() {
+		$gitRepository = new GitRepository();
+		$assertCommand = "git rebase --preserve-merges master";
+		$this->assertSame($assertCommand, $gitRepository->getRebasePreserveMerges('master'));
+	}
+
+	public function testGetRebasePreserveMergesOnto() {
+		$gitRepository = new GitRepository();
+		$assertCommand = "git rebase --preserve-merges --onto master oldmaster";
+		$this->assertSame($assertCommand, $gitRepository->getRebasePreserveMerges('master', 'oldmaster'));
+	}
+
 	/*
-			public function testGetMerge() {
-				$gitRepository = new GitRepository();
-				$assertCommand = "git merge --no-ff mybranch";
-				$this->assertSame($assertCommand, $gitRepository->getMerge('mybranch'));
-			}
-
-			public function testGetMergeWithMessage() {
-				$gitRepository = new GitRepository();
-				$assertCommand = "git merge --no-ff mybranch";
-				$this->assertSame($assertCommand, $gitRepository->getMerge('mybranch', 'Merge happy branch into master'));
-			}
-
-			public function testGetRebase() {
-				$gitRepository = new GitRepository();
-				$assertCommand = "git rebase master";
-				$this->assertSame($assertCommand, $gitRepository->getRebase('master'));
-			}
-
-			public function testGetRebaseOnto() {
-				$gitRepository = new GitRepository();
-				$assertCommand = "git rebase --onto master oldmaster";
-				$this->assertSame($assertCommand, $gitRepository->getRebase('master', 'oldmaster'));
-			}
-
-			/*
-			 * git clean
-			 * git reset --hard
-			 * git reset --mixed
-			 * git reset --soft
-			 * git clone
-			 * git tag -a 0.1 -m "Stable release 0.1"
-			 *
-			 */
+	 * git clean
+	 * git reset --hard
+	 * git reset --mixed
+	 * git reset --soft
+	 * git init
+	 * git clone
+	 * git tag -a 0.1 -m "Stable release 0.1"
+	 *
+	 */
 }

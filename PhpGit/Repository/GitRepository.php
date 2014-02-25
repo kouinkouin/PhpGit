@@ -58,6 +58,25 @@ class GitRepository {
 		return $this->getGitQuery('checkout -q '.($create ? '--no-track -b ' : '').$branch);
 	}
 
+	public function getMerge($branch, $message = '') {
+		return $this->getGitQuery('merge --no-ff '.$branch.(trim($message)==='' ? '' : ' -m "'.$message.'"'));
+	}
+
+	private function getFinalRebase($base, $ontoBranch, $newBase) {
+		if($newBase==='') {
+			return $this->getGitQuery($base.$ontoBranch);
+		} else {
+			return $this->getGitQuery($base.'--onto '.$ontoBranch.' '.$newBase);
+		}
+	}
+
+	public function getRebase($ontoBranch, $newBase = '') {
+		return $this->getFinalRebase('rebase ', $ontoBranch, $newBase);
+	}
+
+	public function getRebasePreserveMerges($ontoBranch, $newBase = '') {
+		return $this->getFinalRebase('rebase --preserve-merges ', $ontoBranch, $newBase);
+	}
 
 }
  
