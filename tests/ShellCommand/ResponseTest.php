@@ -55,5 +55,25 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testIsSuccessReturnCode() {
+		$response = new Response(128, array('44'), 0.003);
+		$this->assertEquals(
+			false,
+			$response->isSuccessReturnCode()
+		);
+
+		$response = new Response(1, array('43'), 0.003);
+		$this->assertEquals(
+			false,
+			$response->isSuccessReturnCode()
+		);
+
+		$response = new Response(0, array('42'), 0.003);
+		$this->assertEquals(
+			true,
+			$response->isSuccessReturnCode()
+		);
+	}
+
 }
  

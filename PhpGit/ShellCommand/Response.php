@@ -9,6 +9,9 @@ namespace PhpGit\ShellCommand;
  */
 class Response {
 
+	const RETURN_OK = 0;
+	const RETURN_KO = 1;
+
 	private $returnCode;
 	private $output;
 	private $executionTime;
@@ -67,6 +70,14 @@ class Response {
 			'output'        => $this->getOutput(),
 			'executionTime' => $this->getExecutionTime()
 		);
+	}
+
+	/**
+	 * Returns if the shell command is a success
+	 * @return bool
+	 */
+	public function isSuccessReturnCode() {
+		return $this->getReturnCode() === self::RETURN_OK;
 	}
 }
  
