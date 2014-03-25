@@ -18,6 +18,6 @@ class GitManagerTest extends \PHPUnit_Framework_TestCase {
 		$response = $gitManager->execute('echo 42');
 		$this->assertInstanceOf('PhpGit\ShellCommand\Response', $response);
 		$this->assertSame(0, $response->getReturnCode());
-		$this->assertSame(array('42'), $response->getOutput());
+		$this->assertSame('42', $response->getOutput());
 	}
 }

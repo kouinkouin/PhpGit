@@ -13,6 +13,31 @@ require_once __DIR__.'/../../PhpGit/ShellCommand/Response.php';
  */
 class ResponseTest extends \PHPUnit_Framework_TestCase {
 
+	public function testGetOutPut() {
+		$output = array(
+			'AM tests/ShellCommand/ResponseTest.php',
+			'?? PhpGit/ShellCommand/'
+		);
+		$response = new Response(128, $output, 0.003);
+		$this->assertSame(
+			'AM tests/ShellCommand/ResponseTest.php
+?? PhpGit/ShellCommand/',
+			$response->getOutput()
+		);
+	}
+
+	public function testGetOutPutLines() {
+		$output = array(
+			'AM tests/ShellCommand/ResponseTest.php',
+			'?? PhpGit/ShellCommand/'
+		);
+		$response = new Response(128, $output, 0.003);
+		$this->assertSame(
+			$output,
+			$response->getOutputLines()
+		);
+	}
+
 	public function testToArray() {
 		$output = array(
 			'AM tests/ShellCommand/ResponseTest.php',
@@ -22,7 +47,8 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
 		$this->assertSame(
 			array(
 				'returnCode'    => 128,
-				'output'        => $output,
+				'output'        => 'AM tests/ShellCommand/ResponseTest.php
+?? PhpGit/ShellCommand/',
 				'executionTime' => 0.003
 			),
 			$response->toArray()

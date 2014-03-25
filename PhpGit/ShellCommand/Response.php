@@ -34,10 +34,18 @@ class Response {
 
 	/**
 	 * Returns the output (stdout & stderr) of the shell command
-	 * A line by array's element
-	 * @return array
+	 * @return string
 	 */
 	public function getOutput() {
+		return implode(PHP_EOL, $this->output);
+	}
+
+	/**
+	 * Returns the output (stdout & stderr) of the shell command
+	 * A array with 1 element by line
+	 * @return array
+	 */
+	public function getOutputLines() {
 		return $this->output;
 	}
 
