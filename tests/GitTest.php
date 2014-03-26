@@ -2,6 +2,7 @@
 namespace PhpGitTests;
 
 use PhpGit\Git;
+use PhpGit\ShellCommand\Executor;
 use PhpGit\ShellCommand\Response;
 
 require_once __DIR__.'/../PhpGit/Git.php';
@@ -14,7 +15,7 @@ require_once __DIR__.'/../PhpGit/Git.php';
 class GitTest extends \PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 * @return \PHPUnit_Framework_MockObject_MockObject|Executor
 	 */
 	private function getMockedExecutor() {
 		return $this->getMockBuilder('\PhpGit\ShellCommand\Executor')->getMock();
@@ -62,4 +63,34 @@ class GitTest extends \PHPUnit_Framework_TestCase {
 		);
 	}
 
+	public function testAdd() {
+		$mockedExecutor = $this->getMockedExecutor();
+		$mockedExecutor
+			->expects($this->any())
+			->method('execute')
+			->will($this->returnValueMap(array(
+					array("git add -v 'azerty.txt' 'qsdfgh.php' 'wxcvbn.sql'", new Response(0, array(''), 0.123)),
+					array("git add -v 'azerty.txt2' 'qsdfgh.php' 'wxcvbn.sql'", new Response(128, array("fatal: le chemin 'azerty.txt2' ne correspond à aucun fichier"), 0.123)),
+				)
+			));
+
+		$git = new Git();
+		$git->setExecutor($mockedExecutor);
+
+		$this->assertTrue(
+			$git->add(array(
+				'azerty.txt',
+				'qsdfgh.php',
+				'wxcvbn.sql'
+			))
+		);
+
+		$this->assertFalse(
+			$git->add(array(
+				'azerty.txt2',
+				'qsdfgh.php',
+				'wxcvbn.sql'
+			))
+		);
+	}
 }

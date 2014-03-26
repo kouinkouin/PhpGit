@@ -2,6 +2,7 @@
 
 namespace PhpGit;
 
+use PhpGit\Repository\GitRepository;
 use PhpGit\ShellCommand\Executor;
 use PhpGit\ShellCommand\Response;
 
@@ -46,6 +47,14 @@ class Git {
 	}
 
 	/**
+	 * Returns the GitRepository
+	 * @return GitRepository
+	 */
+	private function getRepository() {
+		return new GitRepository();
+	}
+
+	/**
 	 * Set the executor will be used to executer the next commands
 	 * @param Executor $executor
 	 */
@@ -60,6 +69,7 @@ class Git {
 	public function getExecutor() {
 		return $this->executor;
 	}
+
 	/**
 	 * Execute the $command, set the response and return if execution is a success
 	 * @param string $command
@@ -72,5 +82,16 @@ class Git {
 			)
 		);
 		return $this->getLastResponse()->isSuccessReturnCode();
+	}
+
+	/**
+	 * Add files to stage
+	 * @param array $files
+	 * @return bool
+	 */
+	public function add(array $files) {
+		return $this->go(
+			$this->getRepository()->getAdd($files)
+		);
 	}
 }
